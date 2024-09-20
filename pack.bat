@@ -5,6 +5,7 @@ set _7z="C:\Program Files\7-Zip\7z.exe"
 set name=Collapse
 set version=1.71.12
 set channel=1
+set isRemovePdb=1
 
 :checkRepoLocation
 if not exist "..\%name%" (
@@ -73,6 +74,23 @@ set /p versionPrompt=^[default: %version%^]^>
 if not "%versionPrompt%" == "" (
 	echo Set to defined version: %versionPrompt%
 	set version=%versionPrompt%
+)
+
+:removePdb
+echo.
+echo Do you want to include symbol .pdb files^?
+set /p isRemovePdbChoice=Yes^(Y^)/No^(N^) ^[default: N^]^> 
+if /I "%channel%" == "Y" (
+    set isRemovePdb=0
+) else (
+    set isRemovePdb=1
+)
+
+if %isRemovePdb% == 1 (
+    for /r %%a in ("%channel%-build\*.pdb") do (
+        del /F /Q "%%a"
+        echo Deleting symbol file: %%a
+    )
 )
 
 set squirrelPath=squirrel
