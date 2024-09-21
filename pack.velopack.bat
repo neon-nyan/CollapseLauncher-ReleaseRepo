@@ -129,7 +129,7 @@ if not exist "%channel%" mkdir "%channel%"
 title=Copying build files...
 xcopy %channel%-build\ %buildPath% /S /H /C 
 title=Making velopack package...
-vpk pack --packId="%name%" --mainExe "%name%.exe" --packVersion="%version%" --packDir="%buildPath%" --icon="%buildPath%\icon.ico" --channel "%channel%" --delta BestSize --outputDir "%releasePath%" --noInst --skipVeloAppCheck --exclude .pdb --yes
+vpk pack --packId="%name%" --mainExe "%name%.exe" --packVersion="%version%" --packDir="%buildPath%" --packTitle="Collapse" --packAuthors="Collapse Project Team" --icon="%buildPath%\icon.ico" --channel "%channel%" --shortcuts Desktop,StartMenuRoot --delta BestSize --outputDir "%releasePath%" --skipVeloAppCheck --exclude .pdb --yes
 del "%releasePath%\%name%-%channel%-Portable.zip"
 
 :: Build latest package file
